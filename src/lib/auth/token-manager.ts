@@ -2,8 +2,8 @@
 import { getAccessToken, setAccessToken, removeAccessToken } from './cookies'
 
 interface TokenPayload {
-	exp?: number // Expiration timestamp
-	iat?: number // Issued at timestamp
+	exp?: number 
+	iat?: number 
 	[key: string]: unknown
 }
 
