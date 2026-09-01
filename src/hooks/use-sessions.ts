@@ -19,9 +19,9 @@ export const useSessions = () => {
 			const response = await apiClient.get('/auth/list-sessions')
 			return response.data
 		},
-		staleTime: 5 * 60 * 1000, // 5 минут
-		refetchOnMount: false, // ← не перезапрашивать при монтировании
-		refetchOnWindowFocus: false, // ← не перезапрашивать при фокусе
+		staleTime: 5 * 60 * 1000, 
+		refetchOnMount: false, 
+		refetchOnWindowFocus: false, 
 		gcTime: 10 * 60 * 1000
 	})
 }
