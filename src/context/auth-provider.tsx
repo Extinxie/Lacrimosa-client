@@ -10,6 +10,9 @@ import {
 import { IUser } from '../types/for-api.types'
 import { publicClient } from '../lib/api/public-client'
 import { clearSession, getSession, setSession } from '../lib/auth/simple-auth'
+import { DEFAULT_COLLECTIONS } from '../components/shared/constants/sub-titles'
+import apiClient from '../lib/api/secure-client'
+import { useUserStore } from '../stores/user-settings/user-settings'
 
 interface AuthContextType {
 	user: IUser | null
@@ -36,9 +39,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 		if (token && user) {
 			setUser(user)
 			setIsAuth(true)
+			void useUserStore.getState().fetchMe()
 		}
 		setIsLoading(false)
 	}, [])
+
+	const createDefaultCollections = async (userId: string) => {
+		try {
+			await Promise.all(
+				DEFAULT_COLLECTIONS.map((col) =>
+					apiClient.post('/users/collections/create', {
+						...col,
+						userId,
+						isDefault: true
+					})
+				)
+			)
+		} catch (error) {
+			console.error('Failed to create default collections:', error)
+		}
+	}
 
 	const signIn = async (email: string, password: string) => {
 		setIsLoading(true)
@@ -53,6 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 			setSession(user, token)
 			setUser(user)
 			setIsAuth(true)
+			void useUserStore.getState().fetchMe()
 		} catch (error: any) {
 			setError(error?.response?.data?.message || error?.message)
 			throw error
@@ -76,10 +97,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 				password
 			})
 			const { user, token } = response.data
+			if (user?.id) {
+				await createDefaultCollections(user.id)
+			}
 
 			setSession(user, token)
 			setUser(user)
 			setIsAuth(true)
+			void useUserStore.getState().fetchMe()
 		} catch (error: any) {
 			setError(error?.response?.data?.message || error?.message)
 			throw error
@@ -90,6 +115,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 	const signOut = () => {
 		clearSession()
+		useUserStore.getState().reset()
 		setUser(null)
 		setIsAuth(false)
 		setError(null)

@@ -2,14 +2,16 @@ import type { Metadata } from 'next'
 import '../assets/styles/globals.css'
 import { Geist } from 'next/font/google'
 import { cn } from '@/src/lib/utils'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Provider from './providers'
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = {
-	title: 'Lacrimosa',
-	description: 'Lacrimosa'
+	title: {
+		default: 'Lacrimosa — Аниме онлайн',
+		template: '%s | Lacrimosa'
+	},
+	description: ''
 }
 
 export default function RootLayout({
@@ -20,6 +22,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="ru"
+			data-scroll-behavior="smooth"
 			className={cn('h-full antialiased', 'font-sans', geist.variable)}
 		>
 			<head>

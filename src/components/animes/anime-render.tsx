@@ -1,4 +1,6 @@
-import { useGetAllAnimes, useLatestAnimes } from '@/src/hooks/get-animes'
+'use client'
+
+import { useGetAllAnimes, useLatestAnimes } from '@/src/hooks/use-get-animes'
 import AnimeCard from '../ui/card'
 import AnimeSkeleton from '../ui/skeleton/skeleton'
 

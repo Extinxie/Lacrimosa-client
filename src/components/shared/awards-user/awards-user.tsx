@@ -1,12 +1,16 @@
-import { useGetAwardsUser } from '@/src/hooks/get-users'
+'use client'
+
+import { useGetAwardsUser } from '@/src/hooks/use-get-users'
+// import { useGetAwardsUser } from '@/src/hooks/get-users'
 import { Crown } from 'lucide-react'
+import Link from 'next/link'
 
 export default function AwardsUser() {
 	const { data, isLoading } = useGetAwardsUser()
 
 	if (isLoading) {
 		return (
-			<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+			<div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24">
 				{[...Array(4)].map((_, index) => (
 					<div
 						key={index}
@@ -29,9 +33,10 @@ export default function AwardsUser() {
 
 			<div className="flex md:grid md:grid-cols-4 gap-4 overflow-x-auto md:overflow-visible pb-4 scrollbar-hide snap-x snap-mandatory">
 				{data?.slice(0, 4).map((user) => (
-					<div
+					<Link
 						key={user.id}
-						className="min-w-50 md:min-w-0 snap-start bg-neutral-900/20 p-3 rounded-lg flex items-center gap-3"
+						href={`/user/${user.name}`}
+						className="min-w-50 md:min-w-0 snap-start bg-neutral-900/20 p-3 rounded-lg flex items-center gap-3 hover:bg-neutral-800/40 transition-colors"
 					>
 						<img
 							src={user.image || ''}
@@ -49,7 +54,7 @@ export default function AwardsUser() {
 								/>
 							)}
 						</div>
-					</div>
+					</Link>
 				))}
 			</div>
 		</div>

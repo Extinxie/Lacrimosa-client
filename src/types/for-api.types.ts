@@ -14,11 +14,39 @@ export type AnimeCountry = 'OTHER' | 'ЯПОНИЯ' | 'КИТАЙ' | 'КОРЕЯ
 export type IUser = {
 	id: string
 	name: string
-	email?: string
+	email: string
 	image?: string | null
 	avatar?: string | null
-	aboutUser?: string | null
+	bio?: string | null
 	premium: boolean
+	bannerProfile?: string | null
+}
+
+export type FavoriteAnime = {
+	id: string
+	animeId: string
+	order: number
+	note: string | null
+	rating: number | null
+	anime: {
+		id: string
+		slug: string
+		russianTitle: string
+		nativeTitle: string
+		poster: string
+		shikimoriRating: number
+	}
+}
+
+export type IUserAnother = {
+	id: string
+	name: string
+	email: string
+	image?: string | null
+	avatar?: string | null
+	bio?: string | null
+	premium: boolean
+	bannerProfile?: string | null
 }
 
 export type IAnimeLatest = {
@@ -54,6 +82,7 @@ export interface ILicensor {
 export type IAnimeDetailsMainpage = {}
 
 export type IAnimeDetailsId = {
+	id: string
 	shikimoriRating: number
 	poster: string | null
 	englishTitle: string | null
@@ -160,4 +189,57 @@ export type Season = {
 	poster: string | null
 	seasonNumber: number
 	isCurrent: boolean
+}
+
+export type Collection = {
+	id: string
+	name: string
+	slug: string
+	icon: string | null
+	color: string | null
+	isDefault: boolean
+	items: CollectionItem[]
+}
+
+export interface IAnime {
+	id: string
+	slug: string
+	russianTitle: string
+	nativeTitle: string
+	poster: string
+	type: string
+	status: string
+	year: number
+	shikimoriRating: number
+	episodesCount: number
+}
+
+export interface PaginatedResponse {
+	success: boolean
+	data: IAnime[]
+	pagination: {
+		total: number
+		page: number
+		limit: number
+		hasMore: boolean
+		totalPages: number
+	}
+}
+
+export type CollectionItem = {
+	id: string
+	animeId: string
+	order: number
+	note: string | null
+	rating: number | null
+	anime: {
+		id: string
+		slug: string
+		russianTitle: string
+		nativeTitle: string
+		poster: string
+		shikimoriRating: number
+		type: string
+		year: number
+	}
 }
