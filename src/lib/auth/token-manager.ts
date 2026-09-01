@@ -1,15 +1,13 @@
-// Token lifecycle management
+
 import { getAccessToken, setAccessToken, removeAccessToken } from './cookies'
 
 interface TokenPayload {
-	exp?: number // Expiration timestamp
-	iat?: number // Issued at timestamp
+	exp?: number 
+	iat?: number 
 	[key: string]: unknown
 }
 
-/**
- * Decode JWT token (basic decode, no verification)
- */
+
 const decodeToken = (token: string): TokenPayload | null => {
 	try {
 		const parts = token.split('.')
@@ -25,9 +23,7 @@ const decodeToken = (token: string): TokenPayload | null => {
 	}
 }
 
-/**
- * Check if token is expired
- */
+
 export const isTokenExpired = (token: string | null): boolean => {
 	if (!token) {
 		return true
