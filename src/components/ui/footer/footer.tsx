@@ -27,7 +27,7 @@ export default function FooterComponent() {
 								<Send className="w-4 h-4" />
 							</a>
 							<a
-								href="https://discord.gg/AG8f5mtfMm"
+								href="https://discord.gg/"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="text-white/40 hover:text-white transition-colors duration-300"
@@ -71,17 +71,6 @@ export default function FooterComponent() {
 							Конфиденциальность
 						</Link>
 					</div>
-
-					<a
-						href="https://telegram.me/lacrimosatv"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="group relative inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-purple-500/20 to-pink-500/20 border border-white/10 text-white/80 hover:text-white transition-all duration-300 hover:scale-105 hover:border-purple-500/40"
-					>
-						<span>Связаться с нами</span>
-						<Send className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-						<span className="absolute inset-0 rounded-full bg-linear-to-r from-purple-500 to-pink-500 opacity-10 group-hover:opacity-100 transition-opacity" />
-					</a>
 				</div>
 
 				<div className="mt-6 pt-6 border-t border-white/5 text-center">
